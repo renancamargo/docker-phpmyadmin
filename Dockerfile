@@ -2,9 +2,9 @@ FROM phpmyadmin/phpmyadmin:latest
 
 RUN a2enmod ssl
 
-RUN sed -ri -e 's,80,443,'
-RUN sed -i -e '/^<\/VirtualHost>/i SSLEngine on' 
-RUN sed -i -e '/^<\/VirtualHost>/i SSLCertificateFile /cert/ssl.crt' 
-RUN sed -i -e '/^<\/VirtualHost>/i SSLCertificateKeyFile /cert/ssl.key' 
+RUN sed -ri -e 's,80,443,' /etc/apache2/sites-available/000-default.conf
+RUN sed -i -e '/^<\/VirtualHost>/i SSLEngine on' /etc/apache2/sites-available/000-default.conf
+RUN sed -i -e '/^<\/VirtualHost>/i SSLCertificateFile /cert/ssl.crt' /etc/apache2/sites-available/000-default.conf
+RUN sed -i -e '/^<\/VirtualHost>/i SSLCertificateKeyFile /cert/ssl.key' /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 443
